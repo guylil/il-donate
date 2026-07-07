@@ -1,0 +1,8 @@
+<div class="about-content">
+  <h2><%= campaign.organization_name %></h2>
+  <% if campaign.respond_to?(:organization_description) && campaign.organization_description.present? %>
+    <%= simple_format campaign.organization_description %>
+  <% else %>
+    <p>Information about this organization will appear here.</p>
+  <% end %>
+</div>

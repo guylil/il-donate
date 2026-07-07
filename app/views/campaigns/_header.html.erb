@@ -1,0 +1,14 @@
+<div class="campaign-header">
+  <% if campaign.cover_image.attached? %>
+    <div class="campaign-cover">
+      <%= image_tag campaign.cover_image %>
+    </div>
+  <% end %>
+
+  <div class="campaign-meta">
+    <h1 class="campaign-title"><%= campaign.title %></h1>
+    <p class="campaign-org"><%= campaign.organization_name %></p>
+
+    <%= render "progress", campaign: campaign %>
+  </div>
+</div>

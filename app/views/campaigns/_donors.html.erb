@@ -1,0 +1,29 @@
+<div class="donors-list">
+  <% if donations.any? %>
+    <% donations.each do |donation| %>
+      <div class="donor-entry">
+        <div class="donor-name">
+          <% case donation.display_preference %>
+          <% when "full_name" %>
+            <%= donation.donor_first_name %> <%= donation.donor_last_name %>
+          <% when "first_name_only" %>
+            <%= donation.donor_first_name %>
+          <% when "anonymous" %>
+            Anonymous
+          <% end %>
+        </div>
+        <div class="donor-amount">
+          ₪<%= number_to_human(donation.amount / 100, precision: 0) %>
+        </div>
+        <% if donation.dedication.present? %>
+          <div class="donor-dedication"><%= donation.dedication %></div>
+        <% end %>
+        <div class="donor-date">
+          <%= l donation.created_at.to_date, format: :long %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="empty-state">No donations yet. Be the first!</p>
+  <% end %>
+</div>
