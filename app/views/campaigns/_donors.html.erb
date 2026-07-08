@@ -1,8 +1,8 @@
-<div class="donors-list">
+<div class="flex flex-col gap-4">
   <% if donations.any? %>
     <% donations.each do |donation| %>
-      <div class="donor-entry">
-        <div class="donor-name">
+      <div class="pb-4 border-b border-gray-100">
+        <div class="font-semibold text-sm text-gray-900">
           <% case donation.display_preference %>
           <% when "full_name" %>
             <%= donation.donor_first_name %> <%= donation.donor_last_name %>
@@ -12,18 +12,18 @@
             Anonymous
           <% end %>
         </div>
-        <div class="donor-amount">
+        <div class="text-lg font-bold text-blue-600 mt-0.5">
           ₪<%= number_with_delimiter(donation.amount / 100) %>
         </div>
         <% if donation.dedication.present? %>
-          <div class="donor-dedication"><%= donation.dedication %></div>
+          <div class="italic text-gray-600 mt-1 text-sm"><%= donation.dedication %></div>
         <% end %>
-        <div class="donor-date">
+        <div class="text-xs text-gray-400 mt-1">
           <%= l donation.created_at.to_date, format: :long %>
         </div>
       </div>
     <% end %>
   <% else %>
-    <p class="empty-state">No donations yet. Be the first!</p>
+    <p class="text-center text-gray-400 py-10 text-base">No donations yet. Be the first!</p>
   <% end %>
 </div>

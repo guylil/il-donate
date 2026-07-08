@@ -1,13 +1,13 @@
-<div class="campaign-header">
+<div class="bg-white border-b border-gray-200">
   <% if campaign.cover_image.attached? %>
-    <div class="campaign-cover">
-      <%= image_tag campaign.cover_image %>
+    <div>
+      <%= image_tag campaign.cover_image, class: "w-full max-h-96 object-cover block" %>
     </div>
   <% end %>
 
-  <div class="campaign-meta">
-    <h1 class="campaign-title"><%= campaign.title %></h1>
-    <p class="campaign-org"><%= campaign.organization_name %></p>
+  <div class="max-w-3xl mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold mb-1"><%= campaign.title %></h1>
+    <p class="text-base text-gray-500 mb-5"><%= campaign.organization_name %></p>
 
     <%= render "progress", campaign: campaign %>
   </div>

@@ -5,22 +5,22 @@
   <%= f.hidden_field :amount, data: { donation_form_target: "amountInput" } %>
 
   <% if donation.errors.any? %>
-    <div class="form-errors">
-      <h4><%= pluralize(donation.errors.count, "error") %> prevented this donation:</h4>
-      <ul>
+    <div class="bg-red-50 border border-red-200 rounded-md p-3 mb-4">
+      <h4 class="text-red-700 text-sm mb-1 font-medium"><%= pluralize(donation.errors.count, "error") %> prevented this donation:</h4>
+      <ul class="m-0 ps-5">
         <% donation.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+          <li class="text-red-700 text-xs"><%= msg %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="form-step" data-donation-form-target="step1">
-    <h3>Choose your amount</h3>
+  <div data-donation-form-target="step1">
+    <h3 class="text-xl mb-4 text-gray-900 font-bold">Choose your amount</h3>
 
-    <div class="amount-presets">
+    <div class="flex flex-wrap gap-2 mb-4">
       <% [50, 100, 250, 500, 1000].each do |amount| %>
-        <button type="button" class="preset-btn"
+        <button type="button" class="px-5 py-2.5 border-2 border-gray-200 rounded-lg bg-white text-base font-semibold text-gray-900 cursor-pointer transition-all hover:border-blue-600 hover:text-blue-600"
                 data-value="<%= amount %>"
                 data-action="donation-form#selectPreset"
                 data-donation-form-target="preset">
@@ -29,81 +29,82 @@
       <% end %>
     </div>
 
-    <div class="custom-amount">
-      <label for="custom_amount">Custom amount</label>
+    <div class="mb-4">
+      <label for="custom_amount" class="block text-sm text-gray-500 mb-1">Custom amount</label>
       <input type="number" id="custom_amount"
              value="<%= donation.amount.present? ? donation.amount / 100 : nil %>"
              placeholder="Enter amount in shekels"
+             class="w-full px-3 py-2.5 border-2 border-gray-200 rounded-md text-base focus:outline-none focus:border-blue-600"
              data-donation-form-target="customAmount"
              data-action="donation-form#customAmountChanged">
     </div>
 
-    <div class="recurring-option">
+    <div class="mb-3 flex items-center gap-2 text-sm">
       <%= f.check_box :recurring, data: { donation_form_target: "recurring", action: "donation-form#toggleRecurring" } %>
       <%= f.label :recurring, "Make this a monthly donation" %>
     </div>
 
-    <div class="recurring-months hidden" data-donation-form-target="recurringMonths">
-      <%= f.label :recurring_months, "For how many months?" %>
-      <%= f.select :recurring_months, [3, 6, 12] %>
+    <div class="mb-4 ms-6 hidden" data-donation-form-target="recurringMonths">
+      <%= f.label :recurring_months, "For how many months?", class: "block text-sm text-gray-500 mb-1" %>
+      <%= f.select :recurring_months, [3, 6, 12], {}, class: "px-3 py-2 border-2 border-gray-200 rounded-md text-base bg-white" %>
     </div>
 
-    <button type="button" class="btn btn-primary" data-action="donation-form#next">
+    <button type="button" class="px-6 py-3 rounded-md text-base font-semibold cursor-pointer transition-colors border-none bg-blue-600 text-white hover:bg-blue-700" data-action="donation-form#next">
       Next
     </button>
   </div>
 
-  <div class="form-step hidden" data-donation-form-target="step2">
-    <h3>Your details</h3>
+  <div class="hidden" data-donation-form-target="step2">
+    <h3 class="text-xl mb-4 text-gray-900 font-bold">Your details</h3>
 
-    <div class="field">
-      <%= f.label :donor_first_name, "First name *" %>
-      <%= f.text_field :donor_first_name %>
+    <div class="mb-4">
+      <%= f.label :donor_first_name, "First name *", class: "block text-sm text-gray-500 mb-1 font-medium" %>
+      <%= f.text_field :donor_first_name, class: "w-full px-3 py-2.5 border-2 border-gray-200 rounded-md text-base focus:outline-none focus:border-blue-600" %>
     </div>
 
-    <div class="field">
-      <%= f.label :donor_last_name, "Last name" %>
-      <%= f.text_field :donor_last_name %>
+    <div class="mb-4">
+      <%= f.label :donor_last_name, "Last name", class: "block text-sm text-gray-500 mb-1 font-medium" %>
+      <%= f.text_field :donor_last_name, class: "w-full px-3 py-2.5 border-2 border-gray-200 rounded-md text-base focus:outline-none focus:border-blue-600" %>
     </div>
 
-    <div class="field">
-      <%= f.label :donor_email, "Email *" %>
-      <%= f.email_field :donor_email %>
+    <div class="mb-4">
+      <%= f.label :donor_email, "Email *", class: "block text-sm text-gray-500 mb-1 font-medium" %>
+      <%= f.email_field :donor_email, class: "w-full px-3 py-2.5 border-2 border-gray-200 rounded-md text-base focus:outline-none focus:border-blue-600" %>
     </div>
 
-    <div class="field">
-      <%= f.label :donor_phone, "Phone" %>
-      <%= f.telephone_field :donor_phone %>
+    <div class="mb-4">
+      <%= f.label :donor_phone, "Phone", class: "block text-sm text-gray-500 mb-1 font-medium" %>
+      <%= f.telephone_field :donor_phone, class: "w-full px-3 py-2.5 border-2 border-gray-200 rounded-md text-base focus:outline-none focus:border-blue-600" %>
     </div>
 
-    <div class="field">
-      <%= f.label :display_preference, "Display my donation as *" %>
-      <div class="radio-group">
-        <label class="radio-label">
+    <div class="mb-4">
+      <%= f.label :display_preference, "Display my donation as *", class: "block text-sm text-gray-500 mb-1 font-medium" %>
+      <div class="flex flex-col gap-2 mt-1">
+        <label class="flex items-center gap-1.5 text-sm text-gray-900 cursor-pointer">
           <%= f.radio_button :display_preference, :full_name %>
           Full name
         </label>
-        <label class="radio-label">
+        <label class="flex items-center gap-1.5 text-sm text-gray-900 cursor-pointer">
           <%= f.radio_button :display_preference, :first_name_only %>
           First name only
         </label>
-        <label class="radio-label">
+        <label class="flex items-center gap-1.5 text-sm text-gray-900 cursor-pointer">
           <%= f.radio_button :display_preference, :anonymous %>
           Anonymous
         </label>
       </div>
     </div>
 
-    <div class="field">
-      <%= f.label :dedication, "Dedication (optional)" %>
-      <%= f.text_area :dedication, placeholder: "In honor of..." %>
+    <div class="mb-4">
+      <%= f.label :dedication, "Dedication (optional)", class: "block text-sm text-gray-500 mb-1 font-medium" %>
+      <%= f.text_area :dedication, placeholder: "In honor of...", class: "w-full px-3 py-2.5 border-2 border-gray-200 rounded-md text-base focus:outline-none focus:border-blue-600 min-h-20 resize-y" %>
     </div>
 
-    <div class="form-actions">
-      <button type="button" class="btn btn-secondary" data-action="donation-form#back">
+    <div class="flex gap-3 mt-6">
+      <button type="button" class="px-6 py-3 rounded-md text-base font-semibold cursor-pointer transition-colors border-none bg-gray-100 text-gray-700 hover:bg-gray-200" data-action="donation-form#back">
         Back
       </button>
-      <%= f.submit "Donate ₪#{donation.amount.present? ? donation.amount / 100 : ''}".strip, class: "btn btn-primary", data: { donation_form_target: "submitBtn" } %>
+      <%= f.submit "Donate ₪#{donation.amount.present? ? donation.amount / 100 : ''}".strip, class: "px-6 py-3 rounded-md text-base font-semibold cursor-pointer transition-colors border-none bg-blue-600 text-white hover:bg-blue-700", data: { donation_form_target: "submitBtn" } %>
     </div>
   </div>
 <% end %>
