@@ -1,0 +1,9 @@
+<tr id="donation_<%= d.id %>">
+  <td><%= d.donor_first_name %> <%= d.donor_last_name %></td>
+  <td><%= d.donor_email %></td>
+  <td><%= d.donor_phone %></td>
+  <td>₪<%= number_with_delimiter(d.amount / 100) %></td>
+  <td><%= d.recurring? ? "Yes (#{d.recurring_months}mo)" : "No" %></td>
+  <td><%= d.dedication.presence || "—" %></td>
+  <td><%= l d.updated_at, format: :short %></td>
+</tr>

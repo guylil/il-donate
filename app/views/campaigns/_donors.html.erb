@@ -13,7 +13,7 @@
           <% end %>
         </div>
         <div class="donor-amount">
-          ₪<%= number_to_human(donation.amount / 100, precision: 0) %>
+          ₪<%= number_with_delimiter(donation.amount / 100) %>
         </div>
         <% if donation.dedication.present? %>
           <div class="donor-dedication"><%= donation.dedication %></div>

@@ -1,0 +1,69 @@
+<div class="admin-page">
+  <h1>Donations</h1>
+  <p class="subtitle"><%= @campaign.title %></p>
+
+  <h2>Pending (<%= @pending_donations.count %>)</h2>
+  <% if @pending_donations.any? %>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Donor</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Amount</th>
+          <th>Recurring</th>
+          <th>Dedication</th>
+          <th>Submitted</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pending_donations.each do |d| %>
+          <tr id="donation_<%= d.id %>">
+            <td><%= d.donor_first_name %> <%= d.donor_last_name %></td>
+            <td><%= d.donor_email %></td>
+            <td><%= d.donor_phone %></td>
+            <td>₪<%= number_with_delimiter(d.amount / 100) %></td>
+            <td><%= d.recurring? ? "Yes (#{d.recurring_months}mo)" : "No" %></td>
+            <td><%= d.dedication.presence || "—" %></td>
+            <td><%= l d.created_at, format: :short %></td>
+            <td class="actions-cell">
+              <%= button_to "Approve", approve_campaign_donation_path(@campaign, d), method: :patch,
+                    class: "btn btn-primary btn-sm",
+                    data: { turbo_confirm: "Approve this donation?" } %>
+              <%= button_to "Cancel", cancel_campaign_donation_path(@campaign, d), method: :patch,
+                    class: "btn btn-danger btn-sm",
+                    data: { turbo_confirm: "Cancel this donation?" } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="empty-state">No pending donations.</p>
+  <% end %>
+
+  <h2>Paid (<%= @paid_donations.count %>)</h2>
+  <% if @paid_donations.any? %>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Donor</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Amount</th>
+          <th>Recurring</th>
+          <th>Dedication</th>
+          <th>Approved</th>
+        </tr>
+      </thead>
+      <tbody id="paid-table-body">
+        <% @paid_donations.each do |d| %>
+          <%= render "paid_row", d: d %>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="empty-state">No paid donations.</p>
+  <% end %>
+</div>

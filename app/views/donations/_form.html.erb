@@ -1,0 +1,109 @@
+<% donation = local_assigns[:donation] || campaign.donations.build %>
+<%= form_with model: donation, url: campaign_donations_path(campaign),
+      data: { donation_form_target: "form" } do |f| %>
+
+  <%= f.hidden_field :amount, data: { donation_form_target: "amountInput" } %>
+
+  <% if donation.errors.any? %>
+    <div class="form-errors">
+      <h4><%= pluralize(donation.errors.count, "error") %> prevented this donation:</h4>
+      <ul>
+        <% donation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-step" data-donation-form-target="step1">
+    <h3>Choose your amount</h3>
+
+    <div class="amount-presets">
+      <% [50, 100, 250, 500, 1000].each do |amount| %>
+        <button type="button" class="preset-btn"
+                data-value="<%= amount %>"
+                data-action="donation-form#selectPreset"
+                data-donation-form-target="preset">
+          ₪<%= amount %>
+        </button>
+      <% end %>
+    </div>
+
+    <div class="custom-amount">
+      <label for="custom_amount">Custom amount</label>
+      <input type="number" id="custom_amount"
+             value="<%= donation.amount.present? ? donation.amount / 100 : nil %>"
+             placeholder="Enter amount in shekels"
+             data-donation-form-target="customAmount"
+             data-action="donation-form#customAmountChanged">
+    </div>
+
+    <div class="recurring-option">
+      <%= f.check_box :recurring, data: { donation_form_target: "recurring", action: "donation-form#toggleRecurring" } %>
+      <%= f.label :recurring, "Make this a monthly donation" %>
+    </div>
+
+    <div class="recurring-months hidden" data-donation-form-target="recurringMonths">
+      <%= f.label :recurring_months, "For how many months?" %>
+      <%= f.select :recurring_months, [3, 6, 12] %>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-action="donation-form#next">
+      Next
+    </button>
+  </div>
+
+  <div class="form-step hidden" data-donation-form-target="step2">
+    <h3>Your details</h3>
+
+    <div class="field">
+      <%= f.label :donor_first_name, "First name *" %>
+      <%= f.text_field :donor_first_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :donor_last_name, "Last name" %>
+      <%= f.text_field :donor_last_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :donor_email, "Email *" %>
+      <%= f.email_field :donor_email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :donor_phone, "Phone" %>
+      <%= f.telephone_field :donor_phone %>
+    </div>
+
+    <div class="field">
+      <%= f.label :display_preference, "Display my donation as *" %>
+      <div class="radio-group">
+        <label class="radio-label">
+          <%= f.radio_button :display_preference, :full_name %>
+          Full name
+        </label>
+        <label class="radio-label">
+          <%= f.radio_button :display_preference, :first_name_only %>
+          First name only
+        </label>
+        <label class="radio-label">
+          <%= f.radio_button :display_preference, :anonymous %>
+          Anonymous
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.label :dedication, "Dedication (optional)" %>
+      <%= f.text_area :dedication, placeholder: "In honor of..." %>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" data-action="donation-form#back">
+        Back
+      </button>
+      <%= f.submit "Donate ₪#{donation.amount.present? ? donation.amount / 100 : ''}".strip, class: "btn btn-primary", data: { donation_form_target: "submitBtn" } %>
+    </div>
+  </div>
+<% end %>

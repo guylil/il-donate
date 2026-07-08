@@ -1,5 +1,15 @@
 <%= render "header", campaign: @campaign %>
 
+<div data-controller="donation-form" class="donation-form-wrapper">
+  <button data-action="donation-form#show" data-donation-form-target="trigger" class="donate-trigger">
+    Donate now
+  </button>
+
+  <div id="donation-form" data-donation-form-target="formContainer" class="donation-form hidden">
+    <%= render "donations/form", campaign: @campaign, donation: @donation %>
+  </div>
+</div>
+
 <div class="campaign-body">
   <nav class="campaign-tabs">
     <%= link_to "Story", campaign_path(@campaign, tab: "story"),

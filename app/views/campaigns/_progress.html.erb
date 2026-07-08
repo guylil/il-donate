@@ -5,11 +5,11 @@
 
   <div class="progress-stats">
     <div class="stat">
-      <span class="stat-value"><%= number_to_human(campaign.amount_raised / 100, precision: 0) %></span>
+      <span class="stat-value"><%= number_with_delimiter(campaign.amount_raised / 100) %></span>
       <span class="stat-label">raised</span>
     </div>
     <div class="stat">
-      <span class="stat-value"><%= number_to_human(campaign.goal_amount / 100, precision: 0) %></span>
+      <span class="stat-value"><%= number_with_delimiter(campaign.goal_amount / 100) %></span>
       <span class="stat-label">goal</span>
     </div>
     <div class="stat">

@@ -11,11 +11,11 @@ class Campaign < ApplicationRecord
 
   def progress_percentage
     return 0 if goal_amount.zero?
-    [(amount_raised.to_f / goal_amount * 100).round(1), 100.0].min
+    [ (amount_raised.to_f / goal_amount * 100).round(1), 100.0 ].min
   end
 
   def amount_needed
-    [goal_amount - amount_raised, 0].max
+    [ goal_amount - amount_raised, 0 ].max
   end
 
   private
