@@ -1,3 +1,7 @@
+# Instructions
+ - No need to run or compile the project - it is already running
+ - When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision   
+
 # IlDonate
 
 Rails 8.1.3 app — Jgive campaign donation page replica (donor-facing, pre-payment).
