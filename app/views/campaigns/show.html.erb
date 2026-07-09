@@ -11,7 +11,7 @@
 </div>
 
 <div>
-  <nav class="flex border-b-2 border-gray-200 mb-6">
+  <nav class="flex border-b-2 border-gray-200 mb-6 mt-4">
     <%= link_to "Project Info", campaign_path(@campaign, tab: "story"),
           class: "px-6 py-3 text-gray-500 text-base font-medium border-b-2 border-transparent -mb-0.5 transition-colors hover:text-purple-500 hover:no-underline #{'text-purple-500 border-purple-500' if @tab == 'story'}" %>
     <%= link_to "Recent Donations", campaign_path(@campaign, tab: "donors"),
