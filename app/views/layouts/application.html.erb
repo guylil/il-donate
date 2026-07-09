@@ -24,8 +24,10 @@
   </head>
 
   <body class="bg-gray-100 text-gray-900 antialiased">
+    <%= render partial: "layouts/top_bar" %>
     <main class="container mx-auto grid">
       <%= yield %>
     </main>
+    <%= render partial: "layouts/bottom_bar" %>
   </body>
 </html>

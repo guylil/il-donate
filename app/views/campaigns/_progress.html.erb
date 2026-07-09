@@ -1,20 +1,28 @@
 <div>
-  <div class="h-2 bg-gray-200 rounded-full overflow-hidden mb-3">
-    <div class="h-full bg-blue-600 rounded-full transition-all duration-300" style="width: <%= campaign.progress_percentage %>%"></div>
+  <div class="flex items-end justify-between mb-3">
+    <div>
+      <span class="text-3xl font-bold text-gray-900">₪<%= number_with_delimiter(campaign.amount_raised / 100) %></span>
+    </div>
+
+    <div class="flex items-center gap-1.5">
+      <span class="text-xl font-bold text-gray-900"><%= campaign.progress_percentage %>%</span>
+      <span class="text-xs bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-full font-medium">funded</span>
+    </div>
   </div>
 
-  <div class="flex gap-8">
-    <div class="flex flex-col">
-      <span class="text-xl font-bold text-gray-900"><%= number_with_delimiter(campaign.amount_raised / 100) %></span>
-      <span class="text-xs text-gray-400 uppercase tracking-wider">raised</span>
-    </div>
-    <div class="flex flex-col">
-      <span class="text-xl font-bold text-gray-900"><%= number_with_delimiter(campaign.goal_amount / 100) %></span>
-      <span class="text-xs text-gray-400 uppercase tracking-wider">goal</span>
-    </div>
-    <div class="flex flex-col">
-      <span class="text-xl font-bold text-gray-900"><%= campaign.progress_percentage %>%</span>
-      <span class="text-xs text-gray-400 uppercase tracking-wider">funded</span>
+  <div class="flex items-end justify-between mb-3 text-xl">
+
+      <div class="text-gray-500 ">
+        Number of donors: <%= campaign.donations.where(status: "pending").count %>
+      </div>
+      <div class="text-gray-500 ">
+              Goal: ₪<%= number_with_delimiter(campaign.goal_amount / 100) %>
+      </div>
+</div>
+
+  <div class="h-8 bg-gray-100 rounded-full overflow-hidden">
+    <div class="h-full bg-purple-500 rounded-full transition-all duration-300 relative flex items-center justify-end" style="width: <%= campaign.progress_percentage %>%">
+      <span class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 text-2xl leading-none">⭐</span>
     </div>
   </div>
 </div>

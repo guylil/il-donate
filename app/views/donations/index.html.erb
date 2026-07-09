@@ -30,7 +30,7 @@
             <td class="px-3 py-2.5 border-b border-gray-100">
               <div class="flex gap-1.5 items-center">
                 <%= button_to "Approve", approve_campaign_donation_path(@campaign, d), method: :patch,
-                      class: "px-3 py-1.5 text-xs font-semibold rounded-md border-none bg-blue-600 text-white hover:bg-blue-700 cursor-pointer",
+                      class: "px-3 py-1.5 text-xs font-semibold rounded-md border-none bg-purple-500 text-white hover:bg-purple-700 cursor-pointer",
                       data: { turbo_confirm: "Approve this donation?" } %>
                 <%= button_to "Cancel", cancel_campaign_donation_path(@campaign, d), method: :patch,
                       class: "px-3 py-1.5 text-xs font-semibold rounded-md border-none bg-red-600 text-white hover:bg-red-700 cursor-pointer",

@@ -1,7 +1,7 @@
 <%= render "header", campaign: @campaign %>
 
-<div data-controller="donation-form" class="px-4">
-  <button data-action="donation-form#show" data-donation-form-target="trigger" class="block w-full max-w-3xl mx-auto my-6 px-6 py-4 bg-blue-600 text-white text-lg font-semibold rounded-lg text-center cursor-pointer hover:bg-blue-700 hover:no-underline">
+<div data-controller="donation-form" class="mt-8 mx-2">
+  <button data-action="donation-form#show" data-donation-form-target="trigger" class="block w-full max-w-3xl mx-auto px-6 py-4 bg-purple-500 text-white text-lg font-semibold rounded-lg text-center cursor-pointer hover:bg-purple-700 hover:no-underline">
     Donate now
   </button>
 
@@ -10,14 +10,14 @@
   </div>
 </div>
 
-<div class="px-4">
+<div>
   <nav class="flex border-b-2 border-gray-200 mb-6">
-    <%= link_to "Story", campaign_path(@campaign, tab: "story"),
-          class: "px-6 py-3 text-gray-500 text-sm font-medium border-b-2 border-transparent -mb-0.5 transition-colors hover:text-blue-600 hover:no-underline #{'text-blue-600 border-blue-600' if @tab == 'story'}" %>
-    <%= link_to "Donors", campaign_path(@campaign, tab: "donors"),
-          class: "px-6 py-3 text-gray-500 text-sm font-medium border-b-2 border-transparent -mb-0.5 transition-colors hover:text-blue-600 hover:no-underline #{'text-blue-600 border-blue-600' if @tab == 'donors'}" %>
-    <%= link_to "About", campaign_path(@campaign, tab: "about"),
-          class: "px-6 py-3 text-gray-500 text-sm font-medium border-b-2 border-transparent -mb-0.5 transition-colors hover:text-blue-600 hover:no-underline #{'text-blue-600 border-blue-600' if @tab == 'about'}" %>
+    <%= link_to "Project Info", campaign_path(@campaign, tab: "story"),
+          class: "px-6 py-3 text-gray-500 text-base font-medium border-b-2 border-transparent -mb-0.5 transition-colors hover:text-purple-500 hover:no-underline #{'text-purple-500 border-purple-500' if @tab == 'story'}" %>
+    <%= link_to "Recent Donations", campaign_path(@campaign, tab: "donors"),
+          class: "px-6 py-3 text-gray-500 text-base font-medium border-b-2 border-transparent -mb-0.5 transition-colors hover:text-purple-500 hover:no-underline #{'text-purple-500 border-purple-500' if @tab == 'donors'}" %>
+    <%= link_to "Updates", campaign_path(@campaign, tab: "about"),
+          class: "px-6 py-3 text-gray-500 text-base font-medium border-b-2 border-transparent -mb-0.5 transition-colors hover:text-purple-500 hover:no-underline #{'text-purple-500 border-purple-500' if @tab == 'about'}" %>
   </nav>
 
   <div class="bg-white rounded-lg p-6 mb-8">
@@ -29,5 +29,17 @@
     <% when "about" %>
       <%= render "about", campaign: @campaign %>
     <% end %>
+  </div>
+
+  <%= render "contact", campaign: @campaign %>
+
+  <div data-controller="donation-form" class="mt-8 mx-2">
+    <button data-action="donation-form#show" data-donation-form-target="trigger" class="block w-full max-w-3xl mx-auto px-6 py-4 bg-purple-500 text-white text-lg font-semibold rounded-lg text-center cursor-pointer hover:bg-purple-700 hover:no-underline">
+      Donate now
+    </button>
+
+    <div id="donation-form" data-donation-form-target="formContainer" class="bg-white rounded-lg p-6 mb-6 hidden">
+      <%= render "donations/form", campaign: @campaign, donation: @donation %>
+    </div>
   </div>
 </div>
