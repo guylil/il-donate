@@ -13,7 +13,7 @@
   <div class="flex items-end justify-between mb-3 text-xl">
 
       <div class="text-gray-500 ">
-        Number of donors: <%= campaign.donations.where(status: "pending").count %>
+        Number of donors: <%= campaign.donations.where(status: "paid").count %>
       </div>
       <div class="text-gray-500 ">
               Goal: ₪<%= number_with_delimiter(campaign.goal_amount) %>

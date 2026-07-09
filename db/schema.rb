@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_09_132608) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_09_173147) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -41,6 +41,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_09_132608) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer "amount_raised", default: 0, null: false
+    t.string "contact_email"
+    t.string "contact_phone"
+    t.string "contact_website"
     t.string "cover_pic_name"
     t.datetime "created_at", null: false
     t.text "description"

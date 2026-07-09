@@ -8,11 +8,12 @@ class DonationsController < ApplicationController
   def create
     @campaign = Campaign.find(params[:campaign_id])
     @donation = @campaign.donations.build(donation_params)
-    @donation.amount = @donation.amount.to_i * 100
+    @donation.amount = @donation.amount.to_i
     @donation.status = "pending"
     @donation.currency = "ILS"
 
     if @donation.save
+      @donation.campaign.increment!(:amount_raised, @donation.amount)
       render turbo_stream: turbo_stream.replace(
         "donation-form",
         partial: "donations/thank_you",

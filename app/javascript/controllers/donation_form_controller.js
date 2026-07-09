@@ -15,11 +15,11 @@ export default class extends Controller {
   connect() {
     const amount = parseInt(this.amountInputTarget.value)
     if (amount) {
-      const match = this.presetTargets.find(p => parseInt(p.dataset.value) * 100 === amount)
+      const match = this.presetTargets.find(p => parseInt(p.dataset.value) === amount)
       if (match) {
         this._selectPreset(match)
       } else {
-        this.customAmountTarget.value = amount / 100
+        this.customAmountTarget.value = amount
       }
     }
     this._syncRecurring()

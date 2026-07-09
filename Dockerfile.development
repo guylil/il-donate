@@ -1,0 +1,28 @@
+FROM ruby:3.4.10-alpine3.24
+
+RUN apk add git
+RUN apk add --update nodejs npm
+RUN apk add curl
+RUN apk add bash
+RUN apk add zsh
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+RUN apk add ruby ruby-dev ruby-bundler ruby-rdoc make gcc libc-dev g++
+WORKDIR /app
+
+RUN touch AGENTS.md
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh)"
+
+ARG YARN_VERSION=1.22.22
+RUN npm install -g yarn@$YARN_VERSION
+ARG RAILS_VERSION
+# Install Rails based on the version specified but if not specified, install the latest version.
+RUN if [ -z "$RAILS_VERSION" ] ; then gem install rails ; else gem install rails -v $RAILS_VERSION ; fi
+
+COPY Gemfile ./
+COPY Gemfile.lock ./
+RUN bundle install
+
+EXPOSE 3000
+CMD ["zsh","bin/dev"]
+#ENTRYPOINT ["zsh"]

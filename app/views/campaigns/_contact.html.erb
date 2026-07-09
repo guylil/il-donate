@@ -8,15 +8,15 @@
   <div class="space-y-2 text-sm text-gray-500">
     <div>
       <span class="font-medium text-gray-700">Email:</span>
-      <a href="#" class="hover:text-purple-500">info@eilat-marine.org.il</a>
+      <a href="mailto:<%= campaign.contact_email %>" class="hover:text-purple-500"><%= campaign.contact_email %></a>
     </div>
     <div>
       <span class="font-medium text-gray-700">Phone:</span>
-      <a href="#" class="hover:text-purple-500">+972-8-630-3666</a>
+      <a href="tel:<%= campaign.contact_phone %>" class="hover:text-purple-500"><%= campaign.contact_phone %></a>
     </div>
     <div>
       <span class="font-medium text-gray-700">Website:</span>
-      <a href="#" class="hover:text-purple-500">www.eilat-marine.org.il</a>
+      <a href="<%= campaign.contact_website %>" class="hover:text-purple-500"><%= campaign.contact_website %></a>
     </div>
   </div>
 </div>

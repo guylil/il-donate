@@ -13,7 +13,7 @@
           <% end %>
         </div>
         <div class="text-lg font-bold text-purple-500 mt-0.5">
-          ₪<%= number_with_delimiter(donation.amount / 100) %>
+          ₪<%= number_with_delimiter(donation.amount) %>
         </div>
         <% if donation.dedication.present? %>
           <div class="italic text-gray-600 mt-1 text-sm"><%= donation.dedication %></div>

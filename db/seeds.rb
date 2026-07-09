@@ -23,7 +23,10 @@ campaign.update!(
   cover_pic_name: "Gulf_of_Eilat_(Red_Sea)_coral_reefs.jpg",
   goal_amount: 500_000,
   amount_raised: 289_500,
-  status: "active"
+  status: "active",
+  contact_email: "info@eilat-marine.org.il",
+  contact_phone: "+972-8-630-3666",
+  contact_website: "https://www.eilat-marine.org.il"
 )
 
 campaign2 = Campaign.find_or_initialize_by(slug: "help-the-dead-sea")
@@ -49,7 +52,10 @@ campaign2.update!(
   cover_pic_name: "Dead_Sea_Jordan_01.jpg",
   goal_amount: 500_000,
   amount_raised: 145_000,
-  status: "active"
+  status: "active",
+  contact_email: "info@deadsea-trust.org.il",
+  contact_phone: "+972-2-999-9999",
+  contact_website: "https://www.deadsea-trust.org.il"
 )
 
 campaign3 = Campaign.find_or_initialize_by(slug: "help-sea-turtles")
@@ -78,7 +84,55 @@ campaign3.update!(
   cover_pic_name: "turtle_Mydas.JPG",
   goal_amount: 250_000,
   amount_raised: 78_000,
-  status: "active"
+  status: "active",
+  contact_email: "turtles@nature-parks.org.il",
+  contact_phone: "+972-9-954-9999",
+  contact_website: "https://www.nature-parks.org.il"
+)
+
+campaign.donations.create!(
+  amount: 500, currency: "ILS", status: "paid",
+  donor_first_name: "Yael", donor_last_name: "Cohen", donor_email: "yael@example.com",
+  display_preference: :full_name, dedication: "For the reef 💙",
+  created_at: 3.days.ago
+)
+campaign.donations.create!(
+  amount: 100, currency: "ILS", status: "paid",
+  donor_first_name: "Moshe", donor_last_name: "Levy", donor_email: "moshe@example.com",
+  display_preference: :first_name_only,
+  created_at: 2.days.ago
+)
+campaign.donations.create!(
+  amount: 250, currency: "ILS", status: "pending",
+  donor_first_name: "Noa", donor_last_name: "Kaplan", donor_email: "noa@example.com",
+  display_preference: :anonymous,
+  created_at: 1.day.ago
+)
+
+campaign2.donations.create!(
+  amount: 1000, currency: "ILS", status: "paid",
+  donor_first_name: "David", donor_last_name: "Mizrahi", donor_email: "david@example.com",
+  display_preference: :full_name,
+  created_at: 5.days.ago
+)
+campaign2.donations.create!(
+  amount: 50, currency: "ILS", status: "paid",
+  donor_first_name: "Rona", donor_last_name: "Shaked", donor_email: "rona@example.com",
+  display_preference: :anonymous,
+  created_at: 4.days.ago
+)
+
+campaign3.donations.create!(
+  amount: 750, currency: "ILS", status: "paid",
+  donor_first_name: "Tomer", donor_last_name: "Bar", donor_email: "tomer@example.com",
+  display_preference: :full_name,
+  created_at: 6.days.ago
+)
+campaign3.donations.create!(
+  amount: 120, currency: "ILS", status: "pending",
+  donor_first_name: "Dana", donor_last_name: "Avni", donor_email: "dana@example.com",
+  display_preference: :first_name_only,
+  created_at: 12.hours.ago
 )
 
 puts "Seeded campaign: #{campaign.title} (#{campaign.slug})"
