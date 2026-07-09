@@ -9,7 +9,7 @@ Rails 8.1.3 app — Jgive campaign donation page replica (donor-facing, pre-paym
 ## Tech
 
 - Ruby 3.4.9, Rails 8.1.3, SQLite3 (ruby docs: https://docs.ruby-lang.org/en/4.0/, rails docs: https://guides.rubyonrails.org/index.html)
-- Hotwire (Turbo + Stimulus), Importmap, Propshaft
+- Hotwire (Turbo + Stimulus), Importmap, Propshaft, Tailwind CSS v4 (tailwindcss-rails)
 - No auth, no admin, no API
 
 ## Models
