@@ -10,5 +10,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: "campaigns#show", id: Campaign.first&.slug || 1
+  root to: "campaigns#show"
 end
